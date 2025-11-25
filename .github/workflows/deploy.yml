@@ -19,19 +19,19 @@ jobs:
         dotnet-version: '3.1.x'
 
     - name: Restore dependencies
-      run: dotnet restore WebApp.csproj
+      run: dotnet restore MyApi.csproj
 
     - name: Build project
-      run: dotnet build WebApp.csproj --configuration Release --no-restore
+      run: dotnet build MyApi.csproj --configuration Release --no-restore
 
     - name: Publish project
-      run: dotnet publish WebApp.csproj -c Release -o publish
+      run: dotnet publish MyApi.csproj -c Release -o publish
 
     - name: Deploy to Azure Web App
       uses: azure/webapps-deploy@v2
       with:
-        app-name: "<deploy-dotnet-core>"  
-        slot-name: "production"
+        app-name: "<deploy-dotnet-core>"   
         publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
         package: publish
+
 
